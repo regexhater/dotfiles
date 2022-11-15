@@ -45,13 +45,13 @@ disabled = false
 [username]
 style_user = "white"
 style_root = "white"
-format = "[$user]($style) "
+format = "[$user]($style)"
 disabled = false
 show_always = true
 
 [hostname]
 ssh_only = false
-format = "on [$hostname](bold yellow) "
+format = "[@](bold red)[$hostname](bold yellow) "
 disabled = false
 
 [directory]
