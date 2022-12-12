@@ -16,9 +16,9 @@ format = """\
 $username\
 $hostname\
 $directory\
-$kubernetes\
 $git_branch\
 $git_status\
+$kubernetes\
 $golang\
 $cmd_duration\
 \n[╰─](bold blue)$character"""
