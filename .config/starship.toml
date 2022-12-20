@@ -46,8 +46,8 @@ disabled = false
 
 # Shows the username
 [username]
-style_user = "fg:white bg:000000"
-style_root = "fg:red bg:000000"
+style_user = "fg:white bg:#000000"
+style_root = "fg:red bg:#000000"
 format = "[$user]($style)"
 disabled = false
 show_always = true
@@ -55,7 +55,7 @@ show_always = true
 [hostname]
 ssh_only = true 
 format = "[@$hostname]($style)"
-style = "bg:000000"
+style = "bg:#000000"
 disabled = false
 
 [directory]
