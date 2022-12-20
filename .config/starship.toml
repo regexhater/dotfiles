@@ -13,9 +13,12 @@ right_format = """$time"""
 
 format = """\
 [╭╴](bold blue)$env_var \
+[](fg:#000000)\
 $username\
 $hostname\
+[](fg:#000000 bg:blue)\
 $directory\
+[](blue)\
 $git_branch\
 $git_status\
 $kubernetes\
@@ -43,35 +46,51 @@ disabled = false
 
 # Shows the username
 [username]
-style_user = "white"
-style_root = "white"
+style_user = "fg:white bg:000000"
+style_root = "fg:red bg:000000"
 format = "[$user]($style)"
 disabled = false
 show_always = true
 
 [hostname]
-ssh_only = false
-format = "[@](bold red)[$hostname](bold yellow) "
+ssh_only = true 
+format = "[@$hostname]($style)"
+style = "bg:000000"
 disabled = false
 
 [directory]
-# truncation_length = 1
+truncation_length = 3 
 truncation_symbol = "…/"
-home_symbol = " ~"
+home_symbol = ""
 read_only_style = "197"
-read_only = "  "
-format = "at [$path]($style)[$read_only]($read_only_style) "
+read_only = ""
+style = "fg:black bg:blue"
+format = "[$path]($style)[$read_only]($read_only_style)"
 truncate_to_repo = false
+
+# Here is how you can shorten some long paths by text replacement
+# similar to mapped_locations in Oh My Posh:
+[directory.substitutions]
+"Documents" = ""
+"Downloads" = ""
+"Music" = ""
+"Pictures" = ""
+"Developer" = ""
+# Keep in mind that the order matters. For example:
+# "Important Documents" = "  "
+# will not be replaced, because "Documents" was already substituted before.
+# So either put "Important Documents" before "Documents" or use the substituted version:
+# "Important  " = "  "
 
 [git_branch]
 symbol = " "
-format = "via [$symbol$branch]($style) "
+format = " via [$symbol$branch]($style) "
 # truncation_length = 4
 truncation_symbol = "…/"
 style = "bold green"
 
 [git_status]
-format = '[\($all_status$ahead_behind\)]($style) '
+format = '[\($all_status$ahead_behind\)]($style)'
 style = "bold green"
 conflicted = "🏳"
 up_to_date = " "
@@ -87,10 +106,9 @@ deleted = " "
 
 [kubernetes]
 format = 'via [ﴱ <$context:$namespace>](bold purple) '
-disabled = false
+disabled = true
 
 # (deactivated because of no space left)
-# 
 [terraform]
 format = "via [ terraform $version]($style) 壟 [$workspace]($style) "
 disabled = false
@@ -117,13 +135,16 @@ format = "via [ $version](bold green) "
 disabled = true
 
 [ruby]
-format = "via [ $version]($style) "
+format = "via [ $version]($style)"
 disabled = true
 
 [golang]
-format = "with [ $version]($style) "
-disabled = false
+format = "with [ $version]($style)"
+disabled = true 
 
 [time]
 format = "[🕒 $time]($style) "
 disabled = false
+
+[cmd_duration]
+format = " [$duration]($style)"
